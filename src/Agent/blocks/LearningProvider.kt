@@ -1,11 +1,10 @@
 package Agent.blocks
 
-import Environment.Action
 
-class LearningProvider(private val action: Action) {
+class LearningProvider() {
 
     fun getQLearning(alpha: Double, gamma: Double) : (Double, Double, Double) -> Double {
-        return {current, reward, future ->  current + alpha * (reward + gamma * (future) - current)}
+        return {reward, current, future ->  current + alpha * (reward + gamma * (future) - current)}
     }
 
 }

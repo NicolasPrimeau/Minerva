@@ -4,13 +4,13 @@ import Environment.Action
 import java.security.SecureRandom
 import java.util.*
 
-class ExplorationProvider(private val action: Action) {
+class ExplorationProvider() {
 
-    fun getStochasticExploration(chanceOfExploration: Double) : () -> Action? {
+    fun getStochasticExploration(chanceOfExploration: Double) : (Array<Action>) -> Action? {
         val r : Random = SecureRandom()
-        return {
+        return { actions ->
                 if (r.nextDouble() < chanceOfExploration) {
-                    Action.values()[r.nextInt(Action.values().size)]
+                    actions[r.nextInt(actions.size)]
                 } else {
                     null
                 }

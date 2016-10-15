@@ -1,4 +1,4 @@
-package Environment
+package Agent
 
 interface EnvironmentModel {
 

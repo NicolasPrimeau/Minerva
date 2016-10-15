@@ -3,12 +3,12 @@ package Agent.blocks
 import Environment.Action
 
 
-class SelectionProvider(private val action: Action) {
+class SelectionProvider() {
 
-    fun getGreedySelection() : (MutableMap<Action, Double>) -> Action {
+    fun getGreedySelection() : (Map<Action, Double>) -> Action {
         return  {
             valueMap ->
-            var minPair : MutableMap.MutableEntry<Action, Double> ? = null
+            var minPair : Map.Entry<Action, Double> ? = null
             for (pair in valueMap) {
                 if (minPair == null || pair.value < minPair.value) {
                     minPair = pair
