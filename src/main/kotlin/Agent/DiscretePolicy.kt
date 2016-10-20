@@ -1,6 +1,6 @@
-package Agent
+package main.kotlin.Agent
 
-import Environment.Action
+import main.kotlin.Environment.Action
 import java.security.SecureRandom
 import java.util.*
 
@@ -35,4 +35,9 @@ class DiscretePolicy(val exploration : (Array<Action>) -> Action?,
             actionMap.map[episode.action] = adaptFunction(episode.reward, currentValue, nextValue)
         }
     }
+
+    override fun actionValues(model: EnvironmentModel) : Map<Action, Double>? {
+        return this.policyMap[model]?.map
+    }
+
 }

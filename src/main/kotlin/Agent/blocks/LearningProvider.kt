@@ -1,4 +1,4 @@
-package Agent.blocks
+package main.kotlin.Agent.blocks
 
 
 class LearningProvider() {

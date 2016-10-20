@@ -1,4 +1,4 @@
-package Agent
+package main.kotlin.Agent
 
 interface EnvironmentModel {
 

@@ -1,8 +1,8 @@
-package Examples.NArmBandit
+package main.kotlin.Examples.NArmBandit
 
-import Environment.Environment
-import Environment.Action
-import Environment.Feedback
+import main.kotlin.Environment.Environment
+import main.kotlin.Environment.Action
+import main.kotlin.Environment.Feedback
 import java.security.SecureRandom
 import java.util.*
 
@@ -15,6 +15,5 @@ class ArmBanditEnvironment : Environment {
         val mean: Double = rewards[Action.values().indexOf(action)]
         return Feedback(mean + r.nextGaussian() * mean)
     }
-
 }
 

@@ -1,8 +1,8 @@
-package Agent
+package main.kotlin.Agent
 
-import Environment.Environment
-import Environment.Action
-import Environment.Feedback
+import main.kotlin.Environment.Environment
+import main.kotlin.Environment.Action
+import main.kotlin.Environment.Feedback
 
 abstract class Agent (val name: String, val env: Environment) {
 
@@ -13,20 +13,12 @@ abstract class Agent (val name: String, val env: Environment) {
         val action: Action = act()
         evaluateResponse(action, env.doAction(action))
         learn()
-        debug()
     }
 
     abstract fun setupPolicy() : Policy
     abstract fun setupEnvironmentModel() : EnvironmentModel
-
     abstract fun act() : Action
-
     abstract fun evaluateResponse(action: Action, response: Feedback)
-
     abstract fun learn()
-
-    open fun debug() {
-        // Left Empty
-    }
-
+    abstract fun getTotalReward(): Double
 }
