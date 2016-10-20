@@ -8,7 +8,12 @@ import java.util.*
 
 class ArmBanditEnvironment : Environment {
 
-    val rewards: List<Double> = listOf(0.1, -0.2, 0.2, -0.3, 0.3, -0.4, 0.4, -0.5, 0.5)
+    val rewards: MutableList<Double> = mutableListOf()
+
+    init {
+        val r = SecureRandom()
+        Action.values().forEach { rewards.add(r.nextDouble() * 100) }
+    }
 
     override fun doAction(action: Action): Feedback {
         val r: Random = SecureRandom()

@@ -1,25 +1,23 @@
 package main.kotlin.Examples.NArmBandit
 
-import main.kotlin.Agent.DiscretePolicy
-import main.kotlin.Agent.EnvironmentModel
-import main.kotlin.Agent.Policy
-import main.kotlin.Agent.SingleObjectiveAgent
+import main.kotlin.Agent.*
 import main.kotlin.Agent.blocks.ExplorationProvider
 import main.kotlin.Agent.blocks.LearningProvider
 import main.kotlin.Agent.blocks.SelectionProvider
 import main.kotlin.Environment.Action
 
-class ArmBanditAgent(env: ArmBanditEnvironment) : SingleObjectiveAgent("Arm Bandit main.kotlin.Agent", env) {
+class ArmBanditAgent(config: AgentConfiguration, env: ArmBanditEnvironment) :
+        SingleObjectiveAgent("Arm Bandit main.kotlin.Agent", env, config) {
 
-    override fun setupPolicy(): Policy {
+    override fun setupPolicy(config: AgentConfiguration): Policy {
         return DiscretePolicy(
-                ExplorationProvider().getMonotonicallyDecreasingExploration(0.25, 0.001),
-                SelectionProvider().getGreedySelection(),
-                LearningProvider().getQLearning(0.1, 0.0),
-                Action.values(), 1.0)
+                config.exploration,
+                config.selection,
+                config.adaptFunction,
+                Action.values())
     }
 
-    override fun setupEnvironmentModel(): EnvironmentModel {
+    override fun setupEnvironmentModel(config: AgentConfiguration): EnvironmentModel {
         return ArmBanditEnvironmentModel()
     }
 

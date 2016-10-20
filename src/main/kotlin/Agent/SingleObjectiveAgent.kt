@@ -4,10 +4,11 @@ import main.kotlin.Environment.Environment
 import main.kotlin.Environment.Action
 import main.kotlin.Environment.Feedback
 
-abstract class SingleObjectiveAgent(name: String, env: Environment) : Agent(name, env) {
+abstract class SingleObjectiveAgent(name: String, env: Environment, configuration: AgentConfiguration) :
+        Agent(name, env, configuration) {
 
-    val objective : ObjectiveEvaluator = ObjectiveEvaluator("singleObjective")
-    var reward: Double = 0.0
+    val objective = ObjectiveEvaluator("singleObjective")
+    var reward = 0.0
 
     override fun evaluateResponse(action: Action, response: Feedback) {
         reward += response.reward

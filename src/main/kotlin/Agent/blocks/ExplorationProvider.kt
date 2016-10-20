@@ -7,20 +7,13 @@ import java.util.*
 class ExplorationProvider() {
 
     fun getStochasticExploration(chanceOfExploration: Double) : (Array<Action>) -> Action? {
-        val r = SecureRandom()
-        return { actions ->
-                if (r.nextDouble() < chanceOfExploration) {
-                    actions[r.nextInt(actions.size)]
-                } else {
-                    null
-                }
-            }
+        return getMonotonicallyDecreasingStochasticExploration(chanceOfExploration, 0.0)
     }
 
-    fun getMonotonicallyDecreasingExploration(chanceOfExploration: Double, decreasePerExploration: Double):
+    fun getMonotonicallyDecreasingStochasticExploration(chanceOfExploration: Double, decreasePerExploration: Double):
             (Array<Action>) -> Action? {
         val r = SecureRandom()
-        var prob = chanceOfExploration
+        var prob = if (chanceOfExploration >= 0) chanceOfExploration else 0.0
         return { actions ->
             if (r.nextDouble() < prob) {
                 prob = arrayOf(prob - decreasePerExploration, 0.0).max() ?: 0.0

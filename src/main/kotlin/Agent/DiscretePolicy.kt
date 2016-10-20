@@ -1,43 +1,27 @@
 package main.kotlin.Agent
 
 import main.kotlin.Environment.Action
-import java.security.SecureRandom
-import java.util.*
 
 class DiscretePolicy(val exploration : (Array<Action>) -> Action?,
-                     val selection : (Map<Action, Double>) -> Action,
+                     val selection : (EnvironmentModel, (EnvironmentModel) -> ActionMap) -> Action,
                      val adaptFunction : (Double, Double, Double) -> Double,
-                     val actions : Array<Action>, weight: Double) : Policy(weight) {
-
-    private class ActionMap(actions: Array<Action>) {
-        val map : MutableMap<Action, Double> = mutableMapOf()
-            get
-
-        init {
-            val random = SecureRandom()
-            actions.forEach { action -> map[action] = random.nextDouble() }
-        }
-    }
+                     val actions : Array<Action>, weight: Double=1.0) : Policy(weight) {
 
     private val policyMap : MutableMap<EnvironmentModel, ActionMap> = mutableMapOf()
 
-    override fun act(model: EnvironmentModel): Action {
-        return exploration(actions) ?: selection(
-                HashMap<Action, Double>((policyMap.getOrPut(model) {ActionMap(actions)}).map))
-    }
+    override fun act(model: EnvironmentModel): Action =
+            exploration(actions) ?: selection(model, {model -> actionValues(model)})
+
 
     override fun adapt(episodes: List<Episode>) {
-        for (episode in episodes) {
-            val actionMap : ActionMap = (policyMap.getOrPut(episode.model) {ActionMap(actions)})
-            val currentValue: Double = actionMap.map.getOrPut(episode.action){0.0}
-            val nextValue: Double = actionMap.map.getOrPut(selection(
-                    HashMap<Action, Double>((policyMap.getOrPut(episode.model) {ActionMap(actions)}).map))){0.0}
-            actionMap.map[episode.action] = adaptFunction(episode.reward, currentValue, nextValue)
+        for ((model, action, reward) in episodes) {
+            val actionMap = (policyMap.getOrPut(model) {ActionMap(actions)})
+            val currentValue = actionMap.actionMap.getOrPut(action){0.0}
+            val nextValue = actionMap.actionMap.getOrPut(selection(model, { model -> actionValues(model)})){0.0}
+            actionMap.actionMap[action] = adaptFunction(reward, currentValue, nextValue)
         }
     }
 
-    override fun actionValues(model: EnvironmentModel) : Map<Action, Double>? {
-        return this.policyMap[model]?.map
-    }
+    override fun actionValues(model: EnvironmentModel) : ActionMap = policyMap.getOrPut(model) {ActionMap(actions)}
 
 }
