@@ -1,8 +1,7 @@
-package main.kotlin.Agent.blocks
+package Agent.blocks
 
-import main.kotlin.Environment.Action
+import Environment.Action
 import java.security.SecureRandom
-import java.util.*
 
 class ExplorationProvider() {
 

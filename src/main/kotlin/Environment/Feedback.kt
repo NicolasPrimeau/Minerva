@@ -1,4 +1,4 @@
-package main.kotlin.Environment
+package Environment
 
 data class Feedback(val reward: Double) {
 

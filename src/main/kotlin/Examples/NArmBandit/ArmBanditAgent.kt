@@ -1,10 +1,7 @@
-package main.kotlin.Examples.NArmBandit
+package Examples.NArmBandit
 
-import main.kotlin.Agent.*
-import main.kotlin.Agent.blocks.ExplorationProvider
-import main.kotlin.Agent.blocks.LearningProvider
-import main.kotlin.Agent.blocks.SelectionProvider
-import main.kotlin.Environment.Action
+import Agent.*
+import Environment.Action
 
 class ArmBanditAgent(config: AgentConfiguration, env: ArmBanditEnvironment) :
         SingleObjectiveAgent("Arm Bandit main.kotlin.Agent", env, config) {

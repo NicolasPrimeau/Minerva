@@ -1,6 +1,6 @@
-package main.kotlin.Agent
+package Agent
 
-import main.kotlin.Environment.Action
+import Environment.Action
 import java.security.SecureRandom
 
 class ActionMap(actions: Array<Action>) {

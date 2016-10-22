@@ -1,4 +1,4 @@
-package main.kotlin.Environment
+package Environment
 
 interface Environment {
     fun doAction(action: Action): Feedback

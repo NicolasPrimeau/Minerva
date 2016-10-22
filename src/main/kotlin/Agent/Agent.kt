@@ -1,8 +1,8 @@
-package main.kotlin.Agent
+package Agent
 
-import main.kotlin.Environment.Environment
-import main.kotlin.Environment.Action
-import main.kotlin.Environment.Feedback
+import Environment.Environment
+import Environment.Action
+import Environment.Feedback
 
 abstract class Agent (val name: String, val env: Environment, config: AgentConfiguration) {
 

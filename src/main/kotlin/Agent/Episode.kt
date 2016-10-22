@@ -1,7 +1,6 @@
-package main.kotlin.Agent
+package Agent
 
-import main.kotlin.Environment.Action
-import main.kotlin.Agent.EnvironmentModel
+import Environment.Action
 
 data class Episode(val model: EnvironmentModel, val action: Action, val reward: Double) {
 

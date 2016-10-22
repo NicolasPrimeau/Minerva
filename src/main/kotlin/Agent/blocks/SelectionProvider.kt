@@ -1,8 +1,8 @@
-package main.kotlin.Agent.blocks
+package Agent.blocks
 
-import main.kotlin.Agent.ActionMap
-import main.kotlin.Agent.EnvironmentModel
-import main.kotlin.Environment.Action
+import Agent.ActionMap
+import Agent.EnvironmentModel
+import Environment.Action
 import java.util.*
 
 

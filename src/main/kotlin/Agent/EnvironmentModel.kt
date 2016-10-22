@@ -1,4 +1,4 @@
-package main.kotlin.Agent
+package Agent
 
 interface EnvironmentModel {
     override fun hashCode() : Int

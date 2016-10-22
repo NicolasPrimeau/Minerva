@@ -1,13 +1,13 @@
-package main.kotlin.Examples.NArmBandit
+package Examples.NArmBandit
 
-import main.kotlin.Agent.AgentConfiguration
-import main.kotlin.Agent.blocks.ExplorationProvider
-import main.kotlin.Agent.blocks.LearningProvider
-import main.kotlin.Agent.blocks.SelectionProvider
-import main.kotlin.Environment.Action
+import Agent.AgentConfiguration
+import Agent.blocks.ExplorationProvider
+import Agent.blocks.LearningProvider
+import Agent.blocks.SelectionProvider
+import Environment.Action
 import java.util.*
 
-val LEARNING_RATE = 0.1
+val LEARNING_RATE = 0.2
 // The future discount is 0.0 here since it's a stationary environmental model
 val FUTURE_DISCOUNT = 0.0
 val EXPLORATION_PROBABILITY = 0.25
