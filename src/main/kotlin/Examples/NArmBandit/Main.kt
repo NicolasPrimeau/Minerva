@@ -7,12 +7,12 @@ import Agent.blocks.SelectionProvider
 import Environment.Action
 import java.util.*
 
-val LEARNING_RATE = 0.2
+val LEARNING_RATE = 0.1
 // The future discount is 0.0 here since it's a stationary environmental model
 val FUTURE_DISCOUNT = 0.0
 val EXPLORATION_PROBABILITY = 0.25
-val EXPLORATION_DECREASE = 0.001
-val STOPPING_CRITERIA = 10000
+val EXPLORATION_DECREASE = 0.0001
+val STOPPING_CRITERIA = 100000
 
 fun main(args: Array<String>) {
     val env = ArmBanditEnvironment()
@@ -20,6 +20,7 @@ fun main(args: Array<String>) {
     println(Action.values()[env.rewards.indexOf(env.rewards.max())])
     println(env.rewards)
     println()
+
     val config = AgentConfiguration(
             ExplorationProvider().getMonotonicallyDecreasingStochasticExploration(EXPLORATION_PROBABILITY,
                     EXPLORATION_DECREASE),
@@ -31,6 +32,9 @@ fun main(args: Array<String>) {
     while (x < STOPPING_CRITERIA) {
         agent.behave()
         x += 1
+        if (x%1000 == 0) {
+            println(x)
+        }
     }
     println(agent.getTotalReward())
     println(agent.policy.actionValues(agent.environmentModel).actionMap.maxWith(

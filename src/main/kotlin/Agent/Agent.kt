@@ -11,8 +11,11 @@ abstract class Agent (val name: String, val env: Environment, config: AgentConfi
 
     fun behave() {
         val action = act()
-        evaluateResponse(action, env.doAction(action))
-        learn()
+        val reward = env.doAction(action)
+        evaluateResponse(action, reward)
+        if (reward.reward != 0.0) {
+            learn()
+        }
     }
 
     abstract fun setupPolicy(config: AgentConfiguration) : Policy

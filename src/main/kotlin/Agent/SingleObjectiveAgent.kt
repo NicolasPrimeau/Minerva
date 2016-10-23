@@ -17,6 +17,7 @@ abstract class SingleObjectiveAgent(name: String, env: Environment, configuratio
 
     override fun learn() {
         this.policy.adapt(objective.getEpisodes())
+        objective.clearEpisodes()
     }
 
     override fun getTotalReward() : Double {
