@@ -29,12 +29,10 @@ fun main(args: Array<String>) {
 
     val agent = ArmBanditAgent(config, env)
     var x = 0
+    println(agent.policy.actionValues(agent.environmentModel).actionMap.map { v ->  v.value})
     while (x < STOPPING_CRITERIA) {
         agent.behave()
         x += 1
-        if (x%1000 == 0) {
-            println(x)
-        }
     }
     println(agent.getTotalReward())
     println(agent.policy.actionValues(agent.environmentModel).actionMap.maxWith(
