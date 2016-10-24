@@ -6,7 +6,7 @@ import Environment.Action
 import Agent.Agent
 import java.security.SecureRandom
 
-class GridEnvironment(random : Boolean=false, val borderReward: Feedback, vararg val dimensions: Int) : Environment {
+open class GridEnvironment(random : Boolean=false, val borderReward: Feedback, vararg val dimensions: Int) : Environment {
 
     val rewards = {
         val r = SecureRandom()
