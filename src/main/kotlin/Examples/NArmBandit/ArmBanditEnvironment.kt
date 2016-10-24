@@ -6,9 +6,7 @@ import Environment.Feedback
 import java.security.SecureRandom
 import java.util.*
 
-class ArmBanditEnvironment : Environment {
-
-    val rewards: MutableList<Double> = mutableListOf()
+class ArmBanditEnvironment : Environment() {
 
     init {
         val r = SecureRandom()

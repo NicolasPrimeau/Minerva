@@ -1,6 +1,5 @@
 package Environment
 
 
-class Point (vararg val dimensions : Double){
-
+class Point (vararg val dimensions : Int){
 }
