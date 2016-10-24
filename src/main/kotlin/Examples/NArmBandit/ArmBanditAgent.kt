@@ -2,6 +2,7 @@ package Examples.NArmBandit
 
 import Agent.*
 import Environment.Action
+import Environment.EnvironmentModel
 
 class ArmBanditAgent(config: AgentConfiguration, env: ArmBanditEnvironment) :
         SingleObjectiveAgent("Arm Bandit main.kotlin.Agent", env, config) {

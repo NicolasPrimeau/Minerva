@@ -1,6 +1,6 @@
 package Examples.NArmBandit
 
-import Agent.EnvironmentModel
+import Environment.EnvironmentModel
 
 class ArmBanditEnvironmentModel : EnvironmentModel {
 

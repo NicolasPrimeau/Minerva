@@ -1,4 +1,4 @@
-package Agent
+package Environment
 
 interface EnvironmentModel {
     override fun hashCode() : Int

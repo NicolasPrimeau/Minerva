@@ -1,6 +1,7 @@
 package Agent
 
 import Environment.Action
+import Environment.EnvironmentModel
 
 
 abstract class Policy(val weight: Double=1.0) {

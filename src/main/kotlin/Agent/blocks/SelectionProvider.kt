@@ -1,7 +1,7 @@
 package Agent.blocks
 
 import Agent.ActionMap
-import Agent.EnvironmentModel
+import Environment.EnvironmentModel
 import Environment.Action
 import java.util.*
 

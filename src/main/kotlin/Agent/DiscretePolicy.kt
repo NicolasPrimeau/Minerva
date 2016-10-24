@@ -1,6 +1,7 @@
 package Agent
 
 import Environment.Action
+import Environment.EnvironmentModel
 
 class DiscretePolicy(val exploration : (Array<Action>) -> Action?,
                      val selection : (EnvironmentModel, (EnvironmentModel) -> ActionMap) -> Action,

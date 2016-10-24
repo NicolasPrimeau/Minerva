@@ -19,7 +19,7 @@ abstract class Agent (val name: String, val env: Environment, config: AgentConfi
     }
 
     abstract fun setupPolicy(config: AgentConfiguration) : Policy
-    abstract fun setupEnvironmentModel(config: AgentConfiguration) : EnvironmentModel
+    abstract fun setupEnvironmentModel(config: AgentConfiguration) : Environment.EnvironmentModel
     abstract fun act() : Action
     abstract fun evaluateResponse(action: Action, response: Feedback)
     abstract fun learn()
