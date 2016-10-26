@@ -1,4 +1,4 @@
-package Agent.blocks
+package agent.blocks
 
 
 class LearningProvider() {

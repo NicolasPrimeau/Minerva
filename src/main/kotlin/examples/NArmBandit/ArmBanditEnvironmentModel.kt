@@ -1,6 +1,6 @@
-package Examples.NArmBandit
+package examples.NArmBandit
 
-import Environment.EnvironmentModel
+import environment.EnvironmentModel
 
 class ArmBanditEnvironmentModel : EnvironmentModel {
 

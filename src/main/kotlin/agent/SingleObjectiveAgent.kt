@@ -1,8 +1,8 @@
-package Agent
+package agent
 
-import Environment.Environment
-import Environment.Action
-import Environment.Feedback
+import environment.Environment
+import environment.Action
+import environment.Feedback
 
 abstract class SingleObjectiveAgent(name: String, env: Environment, configuration: AgentConfiguration) :
         Agent(name, env, configuration) {
@@ -10,7 +10,7 @@ abstract class SingleObjectiveAgent(name: String, env: Environment, configuratio
     val objective = ObjectiveEvaluator("singleObjective")
     var reward = 0.0
 
-    override fun evaluateResponse(action: Action, response: Feedback) {
+    override fun evaluateResponse(action: Action.ActionType, response: Feedback) {
         reward += response.reward
         this.objective.receiveEpisode(Episode(this.environmentModel, action, response.reward))
     }

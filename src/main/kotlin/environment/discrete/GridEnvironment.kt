@@ -1,9 +1,9 @@
-package Environment.discrete
+package environment.discrete
 
-import Environment.Environment
-import Environment.Feedback
-import Environment.Action
-import Agent.Agent
+import environment.Environment
+import environment.Feedback
+import environment.Action
+import agent.Agent
 import java.security.SecureRandom
 
 open class GridEnvironment(random : Boolean=false, val borderReward: Feedback, vararg val dimensions: Int) : Environment {
@@ -34,7 +34,7 @@ open class GridEnvironment(random : Boolean=false, val borderReward: Feedback, v
         })
     }
 
-    override fun doAction(agent: Agent, action: Action) : Feedback {
+    override fun doAction(agent: Agent, action: Action.ActionType) : Feedback {
         if (agent.position.dimensions.size != this.dimensions.size) {
             throw IllegalArgumentException("Not in the same euclidean space")
         }

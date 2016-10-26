@@ -1,16 +1,16 @@
-package Agent
+package agent
 
-import Environment.Action
-import Environment.EnvironmentModel
+import environment.Action
+import environment.EnvironmentModel
 
-class DiscretePolicy(val exploration : (Array<Action>) -> Action?,
-                     val selection : (EnvironmentModel, (EnvironmentModel) -> ActionMap) -> Action,
+class DiscretePolicy(val exploration : (Action) -> Action.ActionType?,
+                     val selection : (EnvironmentModel, (EnvironmentModel) -> ActionMap) -> Action.ActionType,
                      val adaptFunction : (Double, Double, Double) -> Double,
-                     val actions : Array<Action>, weight: Double=1.0) : Policy(weight) {
+                     val actions : Action, weight: Double=1.0) : Policy(weight) {
 
     private val policyMap : MutableMap<EnvironmentModel, ActionMap> = mutableMapOf()
 
-    override fun act(model: EnvironmentModel): Action =
+    override fun act(model: EnvironmentModel): Action.ActionType =
             exploration(actions) ?: selection(model, {model -> actionValues(model)})
 
 

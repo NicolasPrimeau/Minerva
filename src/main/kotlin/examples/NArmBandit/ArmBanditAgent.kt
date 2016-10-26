@@ -1,8 +1,9 @@
-package Examples.NArmBandit
+package examples.NArmBandit
 
-import Agent.*
-import Environment.Action
-import Environment.EnvironmentModel
+import agent.*
+import environment.Action
+import environment.EnvironmentModel
+import environment.Point
 
 class ArmBanditAgent(config: AgentConfiguration, env: ArmBanditEnvironment) :
         SingleObjectiveAgent("Arm Bandit main.kotlin.Agent", env, config) {
@@ -12,14 +13,15 @@ class ArmBanditAgent(config: AgentConfiguration, env: ArmBanditEnvironment) :
                 config.exploration,
                 config.selection,
                 config.adaptFunction,
-                Action.values())
+                config.actions
+                )
     }
 
     override fun setupEnvironmentModel(config: AgentConfiguration): EnvironmentModel {
         return ArmBanditEnvironmentModel()
     }
 
-    override fun act(): Action {
+    override fun act(): Action.ActionType {
         return this.policy.act(this.environmentModel)
     }
 

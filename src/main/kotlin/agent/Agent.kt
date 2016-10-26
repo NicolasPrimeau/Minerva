@@ -1,9 +1,9 @@
-package Agent
+package agent
 
-import Environment.Environment
-import Environment.Action
-import Environment.Feedback
-import Environment.EnvironmentModel
+import environment.Environment
+import environment.Action
+import environment.Feedback
+import environment.EnvironmentModel
 
 abstract class Agent (val name: String, val env: Environment, config: AgentConfiguration) {
 
@@ -23,8 +23,8 @@ abstract class Agent (val name: String, val env: Environment, config: AgentConfi
 
     abstract fun setupPolicy(config: AgentConfiguration) : Policy
     abstract fun setupEnvironmentModel(config: AgentConfiguration) : EnvironmentModel
-    abstract fun act() : Action
-    abstract fun evaluateResponse(action: Action, response: Feedback)
+    abstract fun act() : Action.ActionType
+    abstract fun evaluateResponse(action: Action.ActionType, response: Feedback)
     abstract fun learn()
     abstract fun getTotalReward(): Double
 }
