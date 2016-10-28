@@ -9,22 +9,22 @@ abstract class Agent (val name: String, val env: Environment, config: AgentConfi
 
     val environmentModel = this.setupEnvironmentModel(config)
     val policy = this.setupPolicy(config)
-    val position = config.location
+    var position = config.location
         get
 
     fun behave() {
+        val model = this.environmentModel.deepCopy();
         val action = act()
         val reward = env.doAction(this, action)
-        evaluateResponse(action, reward)
-        if (reward.reward != 0.0) {
-            learn()
-        }
+        evaluateResponse(model, action, reward)
+        this.position = reward.newPosition
+        learn()
     }
 
     abstract fun setupPolicy(config: AgentConfiguration) : Policy
     abstract fun setupEnvironmentModel(config: AgentConfiguration) : EnvironmentModel
     abstract fun act() : Action.ActionType
-    abstract fun evaluateResponse(action: Action.ActionType, response: Feedback)
+    abstract fun evaluateResponse(model: EnvironmentModel, action: Action.ActionType, response: Feedback)
     abstract fun learn()
     abstract fun getTotalReward(): Double
 }

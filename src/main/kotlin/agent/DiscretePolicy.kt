@@ -16,7 +16,7 @@ class DiscretePolicy(val exploration : (Action) -> Action.ActionType?,
 
     override fun adapt(episodes: List<Episode>) {
         for ((model, action, reward) in episodes) {
-            val actionMap = (policyMap.getOrPut(model) {ActionMap(actions)})
+            val actionMap = policyMap.getOrPut(model) {ActionMap(actions)}
             val currentValue = actionMap.actionMap.getOrPut(action){0.0}
             val nextValue = actionMap.actionMap.getOrPut(selection(model, { model -> actionValues(model)})){0.0}
             actionMap.actionMap[action] = adaptFunction(reward, currentValue, nextValue)

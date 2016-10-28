@@ -1,3 +1,5 @@
+@file:Suppress("UNCHECKED_CAST")
+
 package examples.NArmBandit
 
 import agent.AgentConfiguration
@@ -18,7 +20,6 @@ val STOPPING_CRITERIA = 100000
 fun main(args: Array<String>) {
     val env = ArmBanditEnvironment()
 
-
     val config = AgentConfiguration(
             ExplorationProvider().getMonotonicallyDecreasingStochasticExploration(EXPLORATION_PROBABILITY,
                     EXPLORATION_DECREASE),
@@ -28,16 +29,15 @@ fun main(args: Array<String>) {
             Action(10))
 
     val agent = ArmBanditAgent(config, env)
-    var x = 0
+
+    println((env.rewards as Array<Double>).indices.maxBy{ env.rewards[it] })
+    println(env.rewards.joinToString(","))
     println(agent.policy.actionValues(agent.environmentModel).actionMap.map { v ->  v.value})
-    while (x < STOPPING_CRITERIA) {
-        agent.behave()
-        x += 1
-    }
+    for (x in 1..STOPPING_CRITERIA) agent.behave()
     println(agent.getTotalReward())
-    println(agent.policy.actionValues(agent.environmentModel).actionMap.maxWith(
+    println((agent.policy.actionValues(agent.environmentModel).actionMap.maxWith(
             Comparator<Map.Entry<Action.ActionType, Double>> {
-                pair1, pair2 -> if (pair1.value <= pair2.value) -1 else 1})?.key as Action.ActionType)
+                pair1, pair2 -> if (pair1.value <= pair2.value) -1 else 1})?.key as Action.ActionType).type)
     println(agent.policy.actionValues(agent.environmentModel).actionMap.map { v ->  v.value})
     println()
 }
