@@ -2,6 +2,6 @@ package environment
 
 import agent.Agent
 
-interface Environment {
-    fun doAction(agent: Agent, action: Action.ActionType): Feedback
+abstract class Environment(val objectives: Objective) {
+    abstract fun doAction(agent: Agent, action: Action.ActionType): Feedback
 }

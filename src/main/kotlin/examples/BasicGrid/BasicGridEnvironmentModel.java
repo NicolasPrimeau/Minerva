@@ -1,24 +1,25 @@
-package main.kotlin.examples.BasicGrid;
+package examples.BasicGrid;
 
 import environment.EnvironmentModel;
 import environment.Point;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
 
-public class BasicGridEnvironmentModel implements EnvironmentModel {
+class BasicGridEnvironmentModel implements EnvironmentModel {
 
     private Supplier<Point> positionProvider;
 
-    public BasicGridEnvironmentModel(final Supplier<Point> provider) {
+    BasicGridEnvironmentModel(final Supplier<Point> provider) {
         this.positionProvider = provider;
     }
 
-    public BasicGridEnvironmentModel(final Point p) {
+    private BasicGridEnvironmentModel(final Point p) {
         this.positionProvider = () -> p;
     }
 
-    public Point getPoint() {
+    private Point getPoint() {
         return this.positionProvider.get();
     }
 
@@ -33,6 +34,7 @@ public class BasicGridEnvironmentModel implements EnvironmentModel {
                 ((BasicGridEnvironmentModel) other).getPoint().equals(this.positionProvider.get());
     }
 
+    @NotNull
     public EnvironmentModel deepCopy() {
         return new BasicGridEnvironmentModel(this.positionProvider.get());
     }

@@ -6,7 +6,7 @@ import environment.Action
 import java.util.*
 
 
-class SelectionProvider() {
+class SelectionProvider {
     fun getGreedySelection() : (EnvironmentModel, (EnvironmentModel) -> ActionMap) -> Action.ActionType =
             {
                 model, policyFunction ->

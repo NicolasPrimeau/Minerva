@@ -1,5 +1,5 @@
 package environment
 
-data class Feedback(val reward: Double, val newPosition: Point) {
+data class Feedback(val rewards: Map<Objective.ObjectiveType, Double>, val newPosition: Point) {
 
 }

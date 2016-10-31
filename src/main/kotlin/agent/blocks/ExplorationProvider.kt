@@ -3,7 +3,7 @@ package agent.blocks
 import environment.Action
 import java.security.SecureRandom
 
-class ExplorationProvider() {
+class ExplorationProvider {
 
     fun getStochasticExploration(chanceOfExploration: Double) : (Action) -> Action.ActionType? {
         return getMonotonicallyDecreasingStochasticExploration(chanceOfExploration, 0.0)

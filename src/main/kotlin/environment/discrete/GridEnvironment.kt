@@ -1,13 +1,14 @@
 package environment.discrete
 
-import environment.Environment
-import environment.Feedback
-import environment.Action
 import agent.Agent
-import environment.Point
+import environment.*
 import java.security.SecureRandom
 
-open class GridEnvironment(random : Boolean=false, val borderReward: Double, vararg val dimensions: Int) : Environment {
+open class GridEnvironment(random : Boolean=false,
+                           objective: Objective,
+                           val borderReward: Double,
+                           vararg val dimensions: Int) :
+        Environment(objective) {
 
     val rewards = {
         val r = SecureRandom()
@@ -40,7 +41,10 @@ open class GridEnvironment(random : Boolean=false, val borderReward: Double, var
             throw IllegalArgumentException("Not in the same euclidean space")
         }
         val p = translatePosition(action, agent.position)
-        return Feedback(if (p == agent.position) borderReward else this.getFeedback(0, p.dimensions, this.rewards), p)
+        return Feedback(
+                objectives.getAllObjectiveTypes().associateBy(
+                        {it}, {if (p == agent.position) borderReward else this.getFeedback(0, p.dimensions, this.rewards)}),
+                p)
     }
 
     fun getReward(vararg coordinates: Int): Double {

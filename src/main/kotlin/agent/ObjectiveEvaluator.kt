@@ -1,9 +1,10 @@
 package agent
 
 
+import environment.Objective
 import java.util.*
 
-class ObjectiveEvaluator(val name: String) {
+class ObjectiveEvaluator(val name: String, val target: Objective.ObjectiveType) {
 
     private var episodes : MutableList<Episode> = LinkedList()
 
