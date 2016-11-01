@@ -17,11 +17,11 @@ import java.util.Map;
 
 public class Main {
 
-    private final static double LEARNING_RATE = 0.25;
+    private final static double LEARNING_RATE = 0.1;
     private final static double FUTURE_DISCOUNT = 0.9;
-    private final static double EXPLORATION_PROBABILITY = 0.25;
+    private final static double EXPLORATION_PROBABILITY = 0.1;
     private final static double EXPLORATION_DECREASE = 0.0001;
-    private final static double STOPPING_CRITERIA = 1000;
+    private final static double STOPPING_CRITERIA = 100000;
 
     private final static Map<Integer, String> map;
     static {
@@ -36,7 +36,7 @@ public class Main {
     public static void main(final String args[]) {
 
         Objective single = new Objective(1);
-        GridEnvironment env = new BasicGridEnvironment(true, single, -1.0, 4, 4);
+        GridEnvironment env = new BasicGridEnvironment(false, single, -0.5, 4, 4);
         printArray(env.getRewards());
         AgentConfiguration configuration = new AgentConfiguration(
                 new ExplorationProvider().getMonotonicallyDecreasingStochasticExploration(EXPLORATION_PROBABILITY,
